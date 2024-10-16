@@ -9,7 +9,6 @@ dotenv.config();
 const dbUrl = process.env.MONGO_URL;
 const PORT = process.env.PORT;
 
-
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -27,10 +26,10 @@ app.use(
   })
 );
 
-
+app.use("/", (req, res) => res.send("Hello"));
 
 mongoose
-  .connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(dbUrl)
   .then(() => {
     console.log("DB connected...");
     app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
