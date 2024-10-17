@@ -19,8 +19,16 @@ export const registerFormControls = [
         placeholder: "Enter your password",
         componentType: "input",
         type: "password"
+    },
+    {
+        name: "confirmPassword",
+        label: "Confirm Password",
+        placeholder: "Enter your password",
+        componentType: "input",
+        type: "password"
     }
 ]
+
 export const loginFormControls = [
     {
         name: "email",
