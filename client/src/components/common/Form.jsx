@@ -9,10 +9,18 @@ import {
   SelectContent,
   SelectItem,
 } from "../ui/select";
+import { Button } from "../ui/button";
 
-function CommonForm({ formControls }) {
+function CommonForm({
+  formControls,
+  formData,
+  setFormData,
+  onSubmit,
+  buttonText,
+}) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
+    const value = formData[getControlItem.name] || "";
     switch (getControlItem.componentType) {
       case "input":
         element = (
@@ -21,12 +29,27 @@ function CommonForm({ formControls }) {
             placeholder={getControlItem.placeholder}
             id={getControlItem.name}
             type={getControlItem.type}
+            value={value}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           />
         );
         break;
       case "select":
         element = (
-          <Select>
+          <Select
+            onValueChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
+            value={value}
+          >
             <SelectTrigger className="w-full">
               <SelectValue placeholder={getControlItem.placeholder} />
             </SelectTrigger>
@@ -48,6 +71,13 @@ function CommonForm({ formControls }) {
             name={getControlItem.name}
             placeholder={getControlItem.placeholder}
             id={getControlItem.id}
+            value={value}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           />
         );
         break;
@@ -58,6 +88,13 @@ function CommonForm({ formControls }) {
             placeholder={getControlItem.placeholder}
             id={getControlItem.name}
             type={getControlItem.type}
+            value={value}
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                [getControlItem.name]: event.target.value,
+              })
+            }
           />
         );
         break;
@@ -67,7 +104,7 @@ function CommonForm({ formControls }) {
   }
 
   return (
-    <form action="">
+    <form action="" onSubmit={onSubmit}>
       <div className="flex flex-col gap-3">
         {formControls.map((controlItem) => (
           <div key={controlItem.name} className="grid w-full gap-1.5">
@@ -76,12 +113,25 @@ function CommonForm({ formControls }) {
           </div>
         ))}
       </div>
+      <Button type="submit" className="mt-2 w-full ">
+        {buttonText || "Submit"}
+      </Button>
     </form>
   );
 }
 
 export default CommonForm;
 
-CommonForm.prototype = {
-  formControls: PropTypes.object,
+CommonForm.propTypes = {
+  formControls: PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  formData: PropTypes.object.isRequired,
+  setFormData: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  buttonText: PropTypes.string.isRequired,
 };
