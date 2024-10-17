@@ -45,11 +45,9 @@ export default CheckAuth;
 
 // Prop validation
 CheckAuth.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
   user: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string,
     role: PropTypes.string,
-  }).isRequired,
+  }),
   children: PropTypes.node,
 };
