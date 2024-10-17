@@ -9,6 +9,8 @@ dotenv.config();
 const dbUrl = process.env.MONGO_URL;
 const PORT = process.env.PORT;
 
+const apiRouter = require("./routes/api");
+
 app.use(cookieParser());
 app.use(express.json());
 app.use(
@@ -26,6 +28,7 @@ app.use(
   })
 );
 
+app.use("/api", apiRouter);
 app.use("/", (req, res) => res.send("Hello"));
 
 mongoose
