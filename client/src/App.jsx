@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import {  Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/Layout";
 import AuthLogin from "./pages/auth/Login";
 import AuthRegister from "./pages/auth/Register";
@@ -9,13 +9,13 @@ import ShoppingListing from "./pages/shopping-view/Listing";
 import ShoppingCheckout from "./pages/shopping-view/Checkout";
 import ShoppingAccount from "./pages/shopping-view/Account";
 import CheckAuth from "./components/common/CheckAuth";
+import UnAuthPage from "./pages/unauth-page/Index";
+import NotFound from "./pages/not-found/Index";
 
 function App() {
   // dummy data
-  const isAuthenticated = true;
-  const user = {
-    role: "admin"
-  };
+  const isAuthenticated = false;
+  const user = null;
 
 
   return (
@@ -57,7 +57,8 @@ function App() {
             <Route path="checkout" element={<ShoppingCheckout />} />
             <Route path="account" element={<ShoppingAccount />} />
           </Route>
-          <Route path="*" element={<Navigate to={"/auth/login"} />} />
+          <Route path="/unauth-page" element={<UnAuthPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </>
