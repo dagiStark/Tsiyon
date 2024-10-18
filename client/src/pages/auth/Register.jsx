@@ -5,6 +5,7 @@ import { registerFormControls } from "@/config";
 import { useDispatch } from "react-redux";
 import { registerUser } from "@/store/auth-slice";
 
+
 const initialState = {
   username: "",
   email: "",
@@ -20,7 +21,9 @@ function AuthRegister() {
   function onSubmit(event) {
     event.preventDefault();
     dispatch(registerUser(formData)).then((data) => {
-      if (data?.payload?.success === true) navigate("/auth/login");
+      if (data?.payload?.success === true) {
+        navigate("/auth/login");
+      }
     });
   }
 
