@@ -1,20 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import CommonForm from "@/components/common/Form";
 import { registerFormControls } from "@/config";
+import { useDispatch } from "react-redux";
+import { registerUser } from "@/store/auth-slice";
 
 const initialState = {
   username: "",
   email: "",
   password: "",
-  confirmPassword: ""
+  confirmPassword: "",
 };
 
 function AuthRegister() {
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  function onSubmit () {
-    // Here you can call your API to register the user
+  function onSubmit(event) {
+    event.preventDefault();
+    dispatch(registerUser(formData)).then((data) => {
+      if (data?.payload?.success === true) navigate("/auth/login");
+    });
   }
 
   return (

@@ -18,7 +18,7 @@ const authSlice = createSlice({
         state.isLoading = true
     }).addCase(registerUser.fulfilled, (state, action) => {
         state.isLoading = false
-        state.user = action.payload
+        state.user = null
         state.isAuthenticated = false
     }).addCase(registerUser.rejected, (state) => {
         state.isLoading = false
@@ -34,6 +34,9 @@ export const registerUser = createAsyncThunk(
   "/auth/register",
 
   async (formData, { rejectWithValue }) => {
+    if(formData.password !== formData.confirmPassword){
+        return rejectWithValue('Passwords do not match')
+    }
     try {
       const response = await axios.post(
         "http://localhost:5000/api/auth/register",
