@@ -17,19 +17,25 @@ const authSlice = createSlice({
 export const registerUser = createAsyncThunk(
   "/auth/register",
 
-  async (formData) => {
-    const response = await axios.post(
-      "http://localhost:5000/api/auth/register",
-      formData,
-      {
-        withCredentials: true,
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/register",
+        formData,
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An error occurred while registering the user.");
       }
-    );
-
-    return response.data;
+    }
   }
 );
-
 
 
 export const { setUser } = authSlice.actions;
