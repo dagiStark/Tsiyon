@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import CommonForm from "@/components/common/Form";
 import { loginFormControls } from "@/config";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/store/auth-slice";
 
 const initialState = {
   username: "",
@@ -11,9 +13,14 @@ const initialState = {
 
 function AuthLogin() {
   const [formData, setFormData] = useState(initialState);
+  const dispatch = useDispatch()
 
-  function onSubmit() {
-    // Here you can call your API to register the user
+  function onSubmit(event) {
+    event.preventDefault();
+    dispatch(loginUser(formData)).then((data)=>{
+      
+    })
+
   }
 
   return (

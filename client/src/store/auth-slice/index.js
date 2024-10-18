@@ -6,7 +6,6 @@ const initialState = {
   user: null,
 };
 
-
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -14,38 +13,42 @@ const authSlice = createSlice({
     setUser: (state, action) => {},
   },
   extraReducers: (builder) => {
-    builder.addCase(registerUser.pending, (state) => {
-        state.isLoading = true
-    }).addCase(registerUser.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.user = null
-        state.isAuthenticated = false
-    }).addCase(registerUser.rejected, (state) => {
-        state.isLoading = false
-        state.user = null
-        state.isAuthenticated = false
-    }).addCase(loginUser.pending, (state) => {
-        state.isLoading = true
-    }).addCase(loginUser.fulfilled, (state, action) => {
-        state.isLoading = false
-        state.user = action.payload
-        state.isAuthenticated = true
-    }).addCase(loginUser.rejected, (state) => {
-        state.isLoading = false
-        state.user = null
-        state.isAuthenticated = false
-    })
-  }
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(registerUser.rejected, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload.success ? action.payload.user : null;
+        state.isAuthenticated = action.payload.success;
+      })
+      .addCase(loginUser.rejected, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
+      });
+  },
 });
-
-
 
 export const registerUser = createAsyncThunk(
   "/auth/register",
 
   async (formData, { rejectWithValue }) => {
-    if(formData.password !== formData.confirmPassword){
-        return rejectWithValue('Passwords do not match')
+    if (formData.password !== formData.confirmPassword) {
+      return rejectWithValue("Passwords do not match");
     }
     try {
       const response = await axios.post(
@@ -88,9 +91,6 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
-
-
-
 
 export const { setUser } = authSlice.actions;
 export default authSlice.reducer;
