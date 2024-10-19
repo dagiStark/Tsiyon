@@ -14,6 +14,8 @@ import NotFound from "./pages/not-found/Index";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
+import Header from "./pages/admin-view/Header";
+
 
 function App() {
   const { isAuthenticated, user, isLoading } = useSelector(
@@ -25,7 +27,6 @@ function App() {
     dispatch(checkAuth());
   }, [dispatch]); // throws error
 
-  
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -53,7 +54,7 @@ function App() {
               </CheckAuth>
             }
           >
-            <Route path="dashboard" element />
+            <Route path="dashboard" element={<Header />} />
           </Route>
           <Route
             path="/shop"
