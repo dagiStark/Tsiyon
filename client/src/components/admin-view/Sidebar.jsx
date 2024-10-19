@@ -90,3 +90,9 @@ AdminSidebar.propTypes = {
   open: PropTypes.bool.isRequired,
   setOpen: PropTypes.func.isRequired,
 };
+
+MenuItems.propTypes = {
+  setOpen: PropTypes.func.isRequired,
+};
+
+
