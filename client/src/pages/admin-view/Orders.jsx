@@ -3,7 +3,7 @@
 function AdminOrders() {
   return (
     <div>
-      
+      orders
     </div>
   )
 }

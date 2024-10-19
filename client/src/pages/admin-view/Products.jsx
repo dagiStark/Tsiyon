@@ -3,7 +3,7 @@
 function AdminProducts() {
   return (
     <div>
-      
+      products
     </div>
   )
 }

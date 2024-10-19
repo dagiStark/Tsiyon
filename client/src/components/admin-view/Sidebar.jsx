@@ -1,9 +1,9 @@
 import { Fragment } from "react";
-import { ChartNoAxesCombined } from "lucide-react";
+import { ChartNoAxesCombined, Sheet } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LayoutDashboard, ShoppingCart, ListOrdered } from "lucide-react";
 
- const adminSidebarMenuItems = [
+const adminSidebarMenuItems = [
   {
     id: "dashboard",
     label: "Dashboard",
@@ -24,7 +24,6 @@ import { LayoutDashboard, ShoppingCart, ListOrdered } from "lucide-react";
   },
 ];
 
-
 function MenuItems() {
   const navigate = useNavigate();
   return (
@@ -33,7 +32,7 @@ function MenuItems() {
         <div
           key={menuItem.id}
           onClick={() => navigate(menuItem.path)}
-          className="flex items-center gap-2 rounded-md px-3 py-2"
+          className="flex items-center gap-2 rounded-md px-3 py-2 text-xl cursor-pointer text-muted-foreground hover:bg-muted hover:text-foreground"
         >
           {menuItem.icon}
           <span>{menuItem.label}</span>
@@ -43,17 +42,21 @@ function MenuItems() {
   );
 }
 
-function AdminSidebar() {
+function AdminSidebar({open, setOpen}) {
   const navigate = useNavigate();
   return (
     <Fragment>
-      <aside className="w-64 flex-col border-r bg-background p-6">
+      <Sheet open={open}>
+
+      </Sheet>
+      <aside className="w-64 flex-col border-r bg-background p-6 hidden sm:flex">
+        {/* Sidebar content */}
         <div
           className="flex items-center gap-2 cursor-pointer"
           onClick={() => navigate("/admin/dashboard")}
         >
           <ChartNoAxesCombined size={30} />
-          <h1 className="text-xl font-extrabold">Admin Panel</h1>
+          <h1 className="text-2xl font-extrabold">Admin Panel</h1>
         </div>
         <MenuItems />
       </aside>

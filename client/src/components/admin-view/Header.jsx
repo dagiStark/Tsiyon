@@ -4,7 +4,7 @@ import { Menu, LogOut } from "lucide-react";
 function AdminHeader() {
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-background border-b">
-      <Button className="lg:hidden sm:block">
+      <Button className="sm:hidden">
         <Menu />
         <span className="sr-only">Toggle Menu</span>
       </Button>
