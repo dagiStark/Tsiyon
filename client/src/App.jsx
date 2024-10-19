@@ -14,8 +14,10 @@ import NotFound from "./pages/not-found/Index";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { checkAuth } from "./store/auth-slice";
-import Header from "./pages/admin-view/Header";
-
+import AdminDashboard from "./pages/admin-view/Dashboard";
+import AdminProducts from "./pages/admin-view/Products";
+import AdminOrders from "./pages/admin-view/Orders";
+import AdminFeatures from "./pages/admin-view/Features";
 
 function App() {
   const { isAuthenticated, user, isLoading } = useSelector(
@@ -54,7 +56,10 @@ function App() {
               </CheckAuth>
             }
           >
-            <Route path="dashboard" element={<Header />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="products" element={<AdminProducts />} />
+            <Route path="orders" element={<AdminOrders />} />
+            <Route path="features" element={<AdminFeatures />} />
           </Route>
           <Route
             path="/shop"
