@@ -1,4 +1,4 @@
-import {  Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import AuthLayout from "./components/auth/Layout";
 import AuthLogin from "./pages/auth/Login";
 import AuthRegister from "./pages/auth/Register";
@@ -11,14 +11,10 @@ import ShoppingAccount from "./pages/shopping-view/Account";
 import CheckAuth from "./components/common/CheckAuth";
 import UnAuthPage from "./pages/unauth-page/Index";
 import NotFound from "./pages/not-found/Index";
+import { useSelector } from "react-redux";
 
 function App() {
-  // dummy data
-  const isAuthenticated = false;
-  const user = null;
-
-  
-
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   return (
     <>
