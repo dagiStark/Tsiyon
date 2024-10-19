@@ -65,21 +65,32 @@ const loginUser = async (req, res) => {
         id: checkUser._id,
       },
     });
-    
   } catch (error) {
     console.log(error);
     res.status(500).json({ success: false, message: "Internal server Error" });
   }
 };
 
-
-const logoutUser = async(req, res) => {
+const logoutUser = async (req, res) => {
   res.clearCookie("token").json({
     success: true,
-    message: "Logged out successfully!"
-  })
-} 
+    message: "Logged out successfully!",
+  });
+};
+
+const authMiddleware = async (req, res) => {
+  const token = req.cookies.token;
+  if (!token)
+    return res.status(400).json({ success: false, msg: "No token provided" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(400).json({ success: false, msg: "un authorized user!" });
+  }
+};
 
 
-
-module.exports = { registerUser, loginUser, logoutUser };
+module.exports = { registerUser, loginUser, logoutUser, authMiddleware };
