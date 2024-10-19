@@ -78,11 +78,10 @@ const logoutUser = async (req, res) => {
   });
 };
 
-const authMiddleware = async (req, res) => {
+const authMiddleware = async (req, res, next) => {
   const token = req.cookies.token;
   if (!token)
     return res.status(400).json({ success: false, msg: "No token provided" });
-
   try {
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
     req.user = decoded;

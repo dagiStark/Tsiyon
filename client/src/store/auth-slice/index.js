@@ -17,7 +17,7 @@ const authSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
@@ -85,7 +85,7 @@ export const registerUser = createAsyncThunk(
 export const checkAuth = createAsyncThunk(
   "/auth/check-auth",
 
-  async ({ rejectWithValue }) => {
+  async () => {
     try {
       const response = await axios.get(
         "http://localhost:5000/api/auth/check-auth",
@@ -100,11 +100,7 @@ export const checkAuth = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return rejectWithValue(error.response.data);
-      } else {
-        return rejectWithValue("An error occurred while registering the user.");
-      }
+      console.log(error)
     }
   }
 );

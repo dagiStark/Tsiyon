@@ -14,7 +14,7 @@ router.post("/logout", logoutUser);
 router.get("/check-auth", authMiddleware, (req, res) => {
   const user = req.user;
   res.status(200).json({
-    status: "success",
+    success: true,
     message: "Authenticated user!",
     user,
   });
