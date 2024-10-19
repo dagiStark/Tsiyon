@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+
 const initialState = {
   isAuthenticated: false,
-  isLoading: false,
+  isLoading: true,
   user: null,
 };
 
@@ -84,8 +85,7 @@ export const registerUser = createAsyncThunk(
 
 export const checkAuth = createAsyncThunk(
   "/auth/check-auth",
-
-  async () => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         "http://localhost:5000/api/auth/check-auth",
@@ -100,7 +100,13 @@ export const checkAuth = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error)
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(
+          "An error occurred during the authentication check."
+        );
+      }
     }
   }
 );
