@@ -60,8 +60,8 @@ function AdminSidebar({ open, setOpen }) {
         <SheetContent side="left" className="w-64">
           <div className="flex flex-col h-full">
             <SheetHeader className={"border-b"}>
-              <SheetTitle className="flex gap-2 mt-5 mb-4">
-                Admin Panel <ChartNoAxesCombined size={30} />
+              <SheetTitle className="flex gap-2 mt-5 mb-4 font-extrabold items-center">
+                <ChartNoAxesCombined size={30} /> Admin Panel
               </SheetTitle>
             </SheetHeader>
             <MenuItems setOpen={setOpen} />
@@ -92,7 +92,5 @@ AdminSidebar.propTypes = {
 };
 
 MenuItems.propTypes = {
-  setOpen: PropTypes.func.isRequired,
+  setOpen: PropTypes.func,
 };
-
-
