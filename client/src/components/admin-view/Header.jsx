@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Menu, LogOut } from "lucide-react";
+import PropTypes from "prop-types";
 
-function AdminHeader() {
+function AdminHeader({setOpen}) {
   return (
     <header className="flex items-center justify-between px-4 py-3 bg-background border-b">
-      <Button className="sm:hidden">
+      <Button onClick={() => setOpen(true)} className="sm:hidden">
         <Menu />
         <span className="sr-only">Toggle Menu</span>
       </Button>
@@ -19,3 +20,7 @@ function AdminHeader() {
 }
 
 export default AdminHeader;
+
+AdminHeader.propTypes = {
+  setOpen: PropTypes.func.isRequired
+}

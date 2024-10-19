@@ -1,7 +1,14 @@
 import { Fragment } from "react";
-import { ChartNoAxesCombined, Sheet } from "lucide-react";
+import { ChartNoAxesCombined } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LayoutDashboard, ShoppingCart, ListOrdered } from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
+import PropTypes from "prop-types";
 
 const adminSidebarMenuItems = [
   {
@@ -42,13 +49,23 @@ function MenuItems() {
   );
 }
 
-function AdminSidebar({open, setOpen}) {
+function AdminSidebar({ open, setOpen }) {
   const navigate = useNavigate();
   return (
     <Fragment>
-      <Sheet open={open}>
-
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetContent side="left" className="w-64">
+          <div className="flex flex-col h-full">
+            <SheetHeader className={"border-b"}>
+              <SheetTitle>
+                Admin Panel <ChartNoAxesCombined size={30} />
+              </SheetTitle>
+            </SheetHeader>
+            <MenuItems />
+          </div>
+        </SheetContent>
       </Sheet>
+
       <aside className="w-64 flex-col border-r bg-background p-6 hidden sm:flex">
         {/* Sidebar content */}
         <div
@@ -65,3 +82,8 @@ function AdminSidebar({open, setOpen}) {
 }
 
 export default AdminSidebar;
+
+AdminSidebar.propTypes = {
+  open: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired,
+};
