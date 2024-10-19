@@ -57,7 +57,7 @@ function AdminSidebar({ open, setOpen }) {
         <SheetContent side="left" className="w-64">
           <div className="flex flex-col h-full">
             <SheetHeader className={"border-b"}>
-              <SheetTitle>
+              <SheetTitle className="flex gap-2 mt-5 mb-4">
                 Admin Panel <ChartNoAxesCombined size={30} />
               </SheetTitle>
             </SheetHeader>
