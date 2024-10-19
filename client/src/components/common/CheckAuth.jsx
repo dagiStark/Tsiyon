@@ -14,7 +14,10 @@ function CheckAuth({ isAuthenticated, user, children }) {
     return <Navigate to="/auth/login" />;
   }
 
-  if (isAuthenticated && location.pathname.includes("/login")) {
+  if (
+    (isAuthenticated && location.pathname.includes("/login")) ||
+    location.pathname.includes("/register")
+  ) {
     if (user?.role === "admin") {
       return <Navigate to="/admin/dashboard" />;
     } else {
