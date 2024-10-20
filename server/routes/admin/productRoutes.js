@@ -5,9 +5,6 @@ const {
 } = require("../../controllers/admin/productsController");
 const upload = require("../../helpers/cloudinary").upload;
 
-
-
-router.post("/upload-image", upload("my_file"), handleImageUpload);
-
+router.post("/upload-image", upload.single("my_file"), handleImageUpload);
 
 module.exports = router;

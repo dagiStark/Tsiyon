@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import PropTypes from "prop-types";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
+import axios from "axios";
 
 function AdminProductImageUpload({
   imageFile,
@@ -29,11 +30,28 @@ function AdminProductImageUpload({
   }
 
   function handleRemoveImage() {
-    setImageFile(null)
-    if(inputRef.current){
-        inputRef.current.value = ""
+    setImageFile(null);
+    if (inputRef.current) {
+      inputRef.current.value = "";
     }
   }
+
+  async function uploadImageToCloudinary() {
+    const data = new FormData();
+    data.append("my_file", imageFile);
+    const response = await axios.post(
+      "http://localhost:5000/api/admin/products/upload-image",
+      data
+    );
+    console.log("RESPONSE: ",response);
+    
+    if (response) setUploadedImageUrl(response.data);
+  }
+
+  useEffect(() => {
+    if (imageFile !== null) uploadImageToCloudinary();
+  }, [imageFile]);
+
 
   return (
     <div className="w-full max-w-md mx-auto mt-4">
