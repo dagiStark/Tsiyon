@@ -43,15 +43,14 @@ function AdminProductImageUpload({
       "http://localhost:5000/api/admin/products/upload-image",
       data
     );
-    console.log("RESPONSE: ",response);
-    
-    if (response) setUploadedImageUrl(response.data);
+    console.log("RESPONSE: ", response);
+
+    if (response?.data.success) setUploadedImageUrl(response.data.result);
   }
 
   useEffect(() => {
     if (imageFile !== null) uploadImageToCloudinary();
   }, [imageFile]);
-
 
   return (
     <div className="w-full max-w-md mx-auto mt-4">
