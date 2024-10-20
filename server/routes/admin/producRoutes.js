@@ -1,11 +1,13 @@
-const express = require("express")
-const router = express.Router()
-const productController = require("../../controllers/admin/productsController")
-const { handleImageUpload } = require("../../controllers/admin/productsController")
+const express = require("express");
+const router = express.Router();
+const {
+  handleImageUpload,
+} = require("../../controllers/admin/productsController");
+const upload = require("../../helpers/cloudinary").upload;
 
 
 
+router.post("/upload-image", upload("my_file"), handleImageUpload);
 
-router.post("/handle-image-upload", handleImageUpload)
 
-module.exports = router 
+module.exports = router;
