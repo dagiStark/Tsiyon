@@ -7,6 +7,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import CommonForm from "@/components/common/Form";
+import { addProductFormElements } from "@/config";
 
 const initialFormData = {
   image: null,
@@ -24,6 +25,10 @@ function AdminProducts() {
     useState(false);
 
   const [formData, setFormData] = useState(initialFormData);
+
+  function onSubmit() {
+
+  }
 
   return (
     <Fragment>
@@ -47,7 +52,8 @@ function AdminProducts() {
               formData={formData}
               setFormData={setFormData}
               buttonText="Add"
-              
+              formControls={addProductFormElements}
+              onSubmit={onSubmit}
             />
           </div>
         </SheetContent>
