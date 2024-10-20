@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import PropTypes, { func } from "prop-types";
+import PropTypes from "prop-types";
 import { FileIcon, UploadCloudIcon, XIcon } from "lucide-react";
 import { Button } from "../ui/button";
 
@@ -18,7 +18,7 @@ function AdminProductImageUpload({
     if (selectedFile) setImageFile(selectedFile);
   }
 
-  function handleDraOver(event) {
+  function handleDragOver(event) {
     event.preventDefault();
   }
 
@@ -28,11 +28,18 @@ function AdminProductImageUpload({
     if (droppedFile) setImageFile(droppedFile);
   }
 
+  function handleRemoveImage() {
+    setImageFile(null)
+    if(inputRef.current){
+        inputRef.current.value = ""
+    }
+  }
+
   return (
     <div className="w-full max-w-md mx-auto mt-4">
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       <div
-        onDragOver={handleDraOver}
+        onDragOver={handleDragOver}
         onDrop={handleDrop}
         className="border-2 border-dashed rounded-lg p-4 "
       >
@@ -61,6 +68,7 @@ function AdminProductImageUpload({
               variant="ghost"
               size="icon"
               className="text-muted-foreground hover:text-foreground"
+              onClick={handleRemoveImage}
             >
               <XIcon className="w-4 h-4" />
               <span className="sr-only">Remove File</span>
