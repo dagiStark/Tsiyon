@@ -49,7 +49,6 @@ const addProduct = async (req, res) => {
     });
 
     await newProduct.save();
-    3;
 
     res.status(201).json({
       success: true,

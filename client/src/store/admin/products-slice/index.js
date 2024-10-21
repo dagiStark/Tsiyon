@@ -93,10 +93,10 @@ export const deleteProduct = createAsyncThunk(
   "/products/delete-product",
   async (id, { rejectWithValue }) => {
     try {
-      const result = await axios.post(
-        `http://localhost:5000/api/admin/products/add/${id}`
+      const result = await axios.delete(
+        `http://localhost:5000/api/admin/products/delete/${id}`
       );
-      return result?.data;
+      return result?.message;
     } catch (error) {
       // Check if the error response contains data
       if (error.response && error.response.data) {

@@ -11,9 +11,9 @@ const upload = require("../../helpers/cloudinary").upload;
 
 router.post("/upload-image", upload.single("my_file"), handleImageUpload);
 router.post("/add", addProduct);
-router.post("/edit/:id", editProduct);
+router.put("/edit/:id", editProduct);
 router.get("/get", fetchProducts);
-router.post("/delete/:id", deleteProduct);
+router.delete("/delete/:id", deleteProduct);
 
 
 module.exports = router;
