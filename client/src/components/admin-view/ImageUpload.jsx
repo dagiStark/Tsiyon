@@ -11,6 +11,7 @@ function AdminProductImageUpload({
   setImageFile,
   uploadedImageUrl,
   setUploadedImageUrl,
+  setImageLoadingState,
 }) {
   const inputRef = useRef(null);
 
@@ -45,7 +46,10 @@ function AdminProductImageUpload({
     );
     console.log("RESPONSE: ", response);
 
-    if (response?.data.success) setUploadedImageUrl(response.data.result);
+    if (response?.data.success) {
+      setUploadedImageUrl(response.data.result.url);
+      setImageLoadingState(false);
+    }
   }
 
   useEffect(() => {
@@ -104,4 +108,5 @@ AdminProductImageUpload.propTypes = {
   setImageFile: PropTypes.func,
   uploadedImageUrl: PropTypes.string,
   setUploadedImageUrl: PropTypes.func,
+  setImageLoadingState: PropTypes.func,
 };
