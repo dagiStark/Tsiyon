@@ -24,5 +24,62 @@ const handleImageUpload = async (req, res) => {
 
 
 
+// add a new product
 
-module.exports = { handleImageUpload };
+
+const addProduct = async(req, res) => {
+  try {
+    
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+// fetch all products
+
+const fetchProducts = async(req, res) => {
+  try {
+    
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+// edit a product
+
+const editProduct = async(req, res) => {
+  try {
+    
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+// delete a product
+
+
+const deleteProduct = async(req, res) => {
+  try {
+    
+  } catch (error) {
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+
+module.exports = { handleImageUpload, addProduct, fetchProducts, editProduct, deleteProduct };
