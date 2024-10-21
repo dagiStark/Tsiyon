@@ -1,12 +1,7 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "../ui/button";
+import PropTypes from "prop-types";
+
 
 function AdminProductTile({ product }) {
   return (
@@ -33,7 +28,7 @@ function AdminProductTile({ product }) {
             <span className="text-lg font-bold">${product?.salePrice}</span>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between  items-center">
+        <CardFooter className="flex justify-between items-center">
           <Button>Edit</Button>
           <Button>Delete</Button>
         </CardFooter>
@@ -41,5 +36,14 @@ function AdminProductTile({ product }) {
     </Card>
   );
 }
+
+AdminProductTile.propTypes = {
+  product: PropTypes.shape({
+    image: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    salePrice: PropTypes.number,
+  }).isRequired,
+};
 
 export default AdminProductTile;
