@@ -125,9 +125,9 @@ export default CommonForm;
 CommonForm.propTypes = {
   formControls: PropTypes.arrayOf(
     PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      label: PropTypes.string,
+      type: PropTypes.string,
+      name: PropTypes.string,
     })
   ).isRequired,
   formData: PropTypes.object.isRequired,

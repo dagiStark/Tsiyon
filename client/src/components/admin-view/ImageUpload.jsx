@@ -12,6 +12,7 @@ function AdminProductImageUpload({
   uploadedImageUrl,
   setUploadedImageUrl,
   setImageLoadingState,
+  imageLoadingState
 }) {
   const inputRef = useRef(null);
 
@@ -80,6 +81,7 @@ function AdminProductImageUpload({
             <span>Drag & drop or click to upload image</span>
           </Label>
         ) : (
+          imageLoadingState ? <Skeleton /> :
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <FileIcon className="w-8 text-primary mr-2 h-8" />
