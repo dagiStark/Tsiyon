@@ -2,17 +2,30 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-  isAuthenticated: false,
+  productList: [],
   isLoading: true,
-  user: null,
 };
 
 const AdminProductsSlice = createSlice({
   name: "adminProducts",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
-});
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllProducts.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchAllProducts.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.isLoading = false;
+        state.productList = action.payload;
+      })
+      .addCase(fetchAllProducts.rejected, (state) => {
+        state.isLoading = false;
+        state.productList = [];
+      });
+  },
+}); 
 
 export const addNewProduct = createAsyncThunk(
   "/products/add-new-product",
@@ -109,3 +122,5 @@ export const deleteProduct = createAsyncThunk(
     }
   }
 );
+
+export default AdminProductsSlice.reducer;
