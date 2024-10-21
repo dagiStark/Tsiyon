@@ -12,6 +12,7 @@ import AdminProductImageUpload from "@/components/admin-view/ImageUpload";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct, fetchAllProducts } from "@/store/admin/products-slice";
 import { useToast } from "@/hooks/use-toast";
+import AdminProductTile from "@/components/admin-view/ProductTile";
 
 const initialFormData = {
   image: null,
@@ -31,6 +32,7 @@ function AdminProducts() {
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [imageLoadingState, setImageLoadingState] = useState(false);
+  const [currentEditedId, setCurrentEditedId] = useState("");
   const { productList } = useSelector((state) => state.adminProducts);
   const dispatch = useDispatch();
   const { toast } = useToast();
@@ -64,7 +66,19 @@ function AdminProducts() {
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-4 "></div>
+      <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-4">
+        {productList && productList.length > 0
+          ? productList.map((productItem) => (
+              <AdminProductTile
+                setOpenCreateProductsDialog={setOpenCreateProductsDialog}
+                setCurrentEditedId={setCurrentEditedId}
+                setFormData={setFormData}
+                key={productItem}
+                product={productItem}
+              />
+            ))
+          : null}
+      </div>
       <Sheet
         open={openCreateProductsDialog}
         onOpenChange={() => setOpenCreateProductsDialog(false)}
