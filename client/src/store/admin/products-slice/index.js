@@ -61,3 +61,30 @@ export const fetchAllProducts = createAsyncThunk(
     }
   }
 );
+
+export const editProduct = createAsyncThunk(
+  "/products/edit-product",
+  async ({ formData, id }, { rejectWithValue }) => {
+    try {
+      const result = await axios.put(
+        `http://localhost:5000/api/admin/products/edit/:${id}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      return result?.data;
+    } catch (error) {
+      // Check if the error response contains data
+      if (error.response && error.response.data) {
+        // Return a specific error message from the server
+        return rejectWithValue(error.response.data);
+      } else {
+        // Return a general error message
+        return rejectWithValue("An error occurred while adding the product.");
+      }
+    }
+  }
+);
