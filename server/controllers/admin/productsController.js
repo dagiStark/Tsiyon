@@ -48,7 +48,7 @@ const addProduct = async (req, res) => {
       totalStock,
     });
 
-    await newProduct.save();
+    await newProduct.save();3
 
     res.status(201).json({
       success: true,
@@ -66,6 +66,11 @@ const addProduct = async (req, res) => {
 
 const fetchProducts = async (req, res) => {
   try {
+    const listOfProducts = await Product.find({});
+    res.status(200).json({
+      success: true,
+      data: listOfProducts,
+    });
   } catch (error) {
     res.json({
       success: false,
