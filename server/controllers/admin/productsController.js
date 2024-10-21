@@ -48,7 +48,8 @@ const addProduct = async (req, res) => {
       totalStock,
     });
 
-    await newProduct.save();3
+    await newProduct.save();
+    3;
 
     res.status(201).json({
       success: true,
@@ -119,7 +120,7 @@ const editProduct = async (req, res) => {
     const updatedProduct = await findProduct.save();
 
     // Return success response
-    res.json({
+    res.status(200).json({
       success: true,
       message: "Product updated successfully!",
       data: updatedProduct,
@@ -136,6 +137,20 @@ const editProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndDelete(id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Product Deleted successfully!",
+    });
   } catch (error) {
     res.json({
       success: false,
