@@ -10,7 +10,7 @@ import CommonForm from "@/components/common/Form";
 import { addProductFormElements } from "@/config";
 import AdminProductImageUpload from "@/components/admin-view/ImageUpload";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProducts } from "@/store/admin/products-slice";
+import { addNewProduct, fetchAllProducts } from "@/store/admin/products-slice";
 
 const initialFormData = {
   image: null,
@@ -35,13 +35,15 @@ function AdminProducts() {
 
   function onSubmit(event) {
     event.preventDefault();
+    dispatch(addNewProduct({ ...formData, image: uploadedImageUrl })).then(
+      (data) => console.log("Data: ",data)
+    );
   }
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
-  console.log("productList: ", productList);
 
   return (
     <Fragment>

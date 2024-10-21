@@ -42,10 +42,10 @@ function CommonForm({
       case "select":
         element = (
           <Select
-            onValueChange={(event) =>
+            onValueChange={value =>
               setFormData({
                 ...formData,
-                [getControlItem.name]: event.target.value,
+                [getControlItem.name]: value,
               })
             }
             value={value}
@@ -128,6 +128,8 @@ CommonForm.propTypes = {
       label: PropTypes.string,
       type: PropTypes.string,
       name: PropTypes.string,
+      componentType: PropTypes.string.isRequired, // Make sure componentType is validated
+      options: PropTypes.array, 
     })
   ).isRequired,
   formData: PropTypes.object.isRequired,
