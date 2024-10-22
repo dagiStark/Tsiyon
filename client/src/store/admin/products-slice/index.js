@@ -89,9 +89,7 @@ export const editProduct = createAsyncThunk(
       );
       return result?.data;
     } catch (error) {
-      // Check if the error response contains data
       if (error.response && error.response.data) {
-        // Return a specific error message from the server
         return rejectWithValue(error.response.data);
       } else {
         // Return a general error message
