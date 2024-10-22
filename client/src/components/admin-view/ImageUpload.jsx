@@ -14,6 +14,7 @@ function AdminProductImageUpload({
   setUploadedImageUrl,
   setImageLoadingState,
   imageLoadingState,
+  isEditMode,
 }) {
   const inputRef = useRef(null);
 
@@ -72,11 +73,14 @@ function AdminProductImageUpload({
           className="hidden"
           ref={inputRef}
           onChange={handleImageFileChange}
+          disabled={isEditMode}
         />
         {!imageFile ? (
           <Label
             htmlFor="image-upload"
-            className="flex flex-col items-center h-32 cursor-pointer justify-center"
+            className={`flex flex-col items-center h-32 cursor-pointer justify-center ${
+              isEditMode ? "cursor-not-allowed" : ""
+            }`}
           >
             <UploadCloudIcon className="w-10 h-10 text-muted-foreground mb-2" />
             <span>Drag & drop or click to upload image</span>
@@ -113,4 +117,5 @@ AdminProductImageUpload.propTypes = {
   uploadedImageUrl: PropTypes.string,
   setUploadedImageUrl: PropTypes.func,
   setImageLoadingState: PropTypes.func,
+  isEditMode: PropTypes.bool,
 };

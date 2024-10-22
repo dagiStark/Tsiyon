@@ -32,7 +32,7 @@ function AdminProducts() {
   const [imageFile, setImageFile] = useState(null);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [imageLoadingState, setImageLoadingState] = useState(false);
-  const [currentEditedId, setCurrentEditedId] = useState("");
+  const [currentEditedId, setCurrentEditedId] = useState(null);
   const { productList } = useSelector((state) => state.adminProducts);
   const dispatch = useDispatch();
   const { toast } = useToast();
@@ -94,6 +94,7 @@ function AdminProducts() {
             setUploadedImageUrl={setUploadedImageUrl}
             setImageLoadingState={setImageLoadingState}
             imageLoadingState={imageLoadingState}
+            isEditMode={currentEditedId !== null}
           />
           <div className="py-6">
             <CommonForm
