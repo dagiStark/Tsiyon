@@ -18,7 +18,6 @@ function AdminProductTile({
             className="w-full h-[300px] object-cover rounded-t-lg"
           />
         </div>
-
         <CardContent>
           <h2 className="text-xl font-bold mb-2 mt-2">{product?.title}</h2>
           <div className="flex justify-between items-center mb-2">
@@ -35,7 +34,15 @@ function AdminProductTile({
           </div>
         </CardContent>
         <CardFooter className="flex justify-between items-center">
-          <Button>Edit</Button>
+          <Button
+            onClick={() => {
+              setOpenCreateProductsDialog(true);
+              setCurrentEditedId(product?._id);
+              setFormData(product);
+            }}
+          >
+            Edit
+          </Button>
           <Button>Delete</Button>
         </CardFooter>
       </div>
@@ -49,7 +56,11 @@ AdminProductTile.propTypes = {
     title: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     salePrice: PropTypes.number,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
+  setOpenCreateProductsDialog: PropTypes.func.isRequired,
+  setCurrentEditedId: PropTypes.func.isRequired,
+  setFormData: PropTypes.func.isRequired,
 };
 
 export default AdminProductTile;
