@@ -79,7 +79,7 @@ export const editProduct = createAsyncThunk(
   async ({ formData, id }, { rejectWithValue }) => {
     try {
       const result = await axios.put(
-        `http://localhost:5000/api/admin/products/edit/:${id}`,
+        `http://localhost:5000/api/admin/products/edit/${id}`,
         formData,
         {
           headers: {
