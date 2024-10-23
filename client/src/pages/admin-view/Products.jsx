@@ -14,6 +14,7 @@ import {
   addNewProduct,
   fetchAllProducts,
   editProduct,
+  deleteProduct,
 } from "@/store/admin/products-slice";
 import { useToast } from "@/hooks/use-toast";
 import AdminProductTile from "@/components/admin-view/ProductTile";
@@ -75,6 +76,15 @@ function AdminProducts() {
       .every((item) => item);
   }
 
+  function handleDelete(getCurrentProductId) {
+    dispatch(deleteProduct(getCurrentProductId)).then((data) => {
+      console.log(data);
+      if (data?.payload?.success) {
+        dispatch(fetchAllProducts());
+      }
+    });
+  }
+
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
@@ -96,6 +106,7 @@ function AdminProducts() {
                 setFormData={setFormData}
                 key={productItem._id}
                 product={productItem}
+                handleDelete={handleDelete}
               />
             ))
           : null}

@@ -106,7 +106,7 @@ export const deleteProduct = createAsyncThunk(
       const result = await axios.delete(
         `http://localhost:5000/api/admin/products/delete/${id}`
       );
-      return result?.message;
+      return result?.data;
     } catch (error) {
       // Check if the error response contains data
       if (error.response && error.response.data) {

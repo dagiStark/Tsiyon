@@ -7,6 +7,7 @@ function AdminProductTile({
   setOpenCreateProductsDialog,
   setCurrentEditedId,
   setFormData,
+  handleDelete,
 }) {
   return (
     <Card className="w-full max-w-sm mx-auto">
@@ -43,7 +44,7 @@ function AdminProductTile({
           >
             Edit
           </Button>
-          <Button>Delete</Button>
+          <Button onClick={() => handleDelete(product._id)}>Delete</Button>
         </CardFooter>
       </div>
     </Card>
@@ -61,7 +62,7 @@ AdminProductTile.propTypes = {
   setOpenCreateProductsDialog: PropTypes.func.isRequired,
   setCurrentEditedId: PropTypes.func.isRequired,
   setFormData: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired,
 };
-
 
 export default AdminProductTile;
