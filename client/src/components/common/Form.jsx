@@ -17,6 +17,7 @@ function CommonForm({
   setFormData,
   onSubmit,
   buttonText,
+  isBtnDisabled,
 }) {
   function renderInputsByComponentType(getControlItem) {
     let element = null;
@@ -42,7 +43,7 @@ function CommonForm({
       case "select":
         element = (
           <Select
-            onValueChange={value =>
+            onValueChange={(value) =>
               setFormData({
                 ...formData,
                 [getControlItem.name]: value,
@@ -113,7 +114,7 @@ function CommonForm({
           </div>
         ))}
       </div>
-      <Button type="submit" className="mt-2 w-full ">
+      <Button type="submit" className="mt-2 w-full " disabled={isBtnDisabled}>
         {buttonText || "Submit"}
       </Button>
     </form>
@@ -122,6 +123,7 @@ function CommonForm({
 
 export default CommonForm;
 
+
 CommonForm.propTypes = {
   formControls: PropTypes.arrayOf(
     PropTypes.shape({
@@ -129,11 +131,12 @@ CommonForm.propTypes = {
       type: PropTypes.string,
       name: PropTypes.string,
       componentType: PropTypes.string.isRequired, // Make sure componentType is validated
-      options: PropTypes.array, 
+      options: PropTypes.array,
     })
   ).isRequired,
   formData: PropTypes.object.isRequired,
   setFormData: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
   buttonText: PropTypes.string.isRequired,
+  isBtnDisabled: PropTypes.bool.isRequired,
 };
