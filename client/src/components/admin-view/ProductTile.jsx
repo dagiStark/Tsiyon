@@ -63,4 +63,5 @@ AdminProductTile.propTypes = {
   setFormData: PropTypes.func.isRequired,
 };
 
+
 export default AdminProductTile;

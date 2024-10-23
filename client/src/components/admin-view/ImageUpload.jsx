@@ -65,7 +65,9 @@ function AdminProductImageUpload({
       <div
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        className="border-2 border-dashed rounded-lg p-4 "
+        className={`border-2 border-dashed rounded-lg p-4 ${
+          isEditMode ? "opacity-60" : ""
+        }`}
       >
         <Input
           id="image-upload"
