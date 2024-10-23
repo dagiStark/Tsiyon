@@ -53,6 +53,11 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.user = null;
         state.isAuthenticated = false;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.isLoading = false;
+        state.user = null;
+        state.isAuthenticated = false;
       });
   },
 });
@@ -129,6 +134,28 @@ export const loginUser = createAsyncThunk(
         return rejectWithValue(error.response.data);
       } else {
         return rejectWithValue("An error occurred while registering the user.");
+      }
+    }
+  }
+);
+
+export const logoutUser = createAsyncThunk(
+  "/auth/logout",
+
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/auth/logout",
+        {
+          withCredentials: true,
+        }
+      );
+      return response.data;
+    } catch (error) {
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue("An error occurred while logging out the user!");
       }
     }
   }
