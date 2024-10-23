@@ -78,7 +78,6 @@ function AdminProducts() {
 
   function handleDelete(getCurrentProductId) {
     dispatch(deleteProduct(getCurrentProductId)).then((data) => {
-      console.log(data);
       if (data?.payload?.success) {
         dispatch(fetchAllProducts());
       }
