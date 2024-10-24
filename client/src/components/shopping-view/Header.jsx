@@ -3,6 +3,23 @@ import { ShoppingCart, Menu } from "lucide-react";
 import { SheetTrigger, Sheet, SheetContent } from "../ui/sheet";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
+import { shoppingViewHeaderMenuItems } from "@/config";
+
+function MenuItems() {
+  return (
+    <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
+      {shoppingViewHeaderMenuItems.map((menuItem) => (
+        <Link
+          to={menuItem.path}
+          key={menuItem.id}
+          className="text-sm font-medium"
+        >
+          {menuItem.label}
+        </Link>
+      ))}
+    </nav>
+  );
+}
 
 function ShoppingHeader() {
   const { isAuthenticated } = useSelector((state) => state.auth);
@@ -22,13 +39,17 @@ function ShoppingHeader() {
               <span className="sr-only">Toggle header menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-full max-w-xs"></SheetContent>
+          <SheetContent side="left" className="w-full max-w-xs">
+            <MenuItems />
+          </SheetContent>
         </Sheet>
-        <div className="hidden lg:block"></div>
+        <div className="hidden lg:block">
+          <MenuItems />
+        </div>
         {isAuthenticated ? <div></div> : null}
       </div>
     </header>
   );
 }
-
+ 
 export default ShoppingHeader;
