@@ -51,7 +51,12 @@ const loginUser = async (req, res) => {
       return res.status(400).json({ success: false, msg: "Invalid password!" });
     }
     const token = jwt.sign(
-      { id: checkUser._id, role: checkUser.role, email: checkUser.email },
+      {
+        id: checkUser._id,
+        role: checkUser.role,
+        email: checkUser.email,
+        username: checkUser.username,
+      },
       process.env.SECRET_KEY,
       { expiresIn: "60m" }
     );
@@ -63,6 +68,7 @@ const loginUser = async (req, res) => {
         email: checkUser.email,
         role: checkUser.role,
         id: checkUser._id,
+        username: checkUser.username,
       },
     });
   } catch (error) {
