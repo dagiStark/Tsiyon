@@ -4,8 +4,10 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { sortOptions } from "@/config";
 import { ArrowUpDown } from "lucide-react";
 
 function ShoppingListing() {
@@ -28,14 +30,19 @@ function ShoppingListing() {
                   <span>Sort by</span>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="">
+              <DropdownMenuContent className="w-[200px]" align="end">
                 <DropdownMenuRadioGroup>
-
+                  {sortOptions.map((sortItem) => (
+                    <DropdownMenuRadioItem key={sortItem.id}>
+                      {sortItem.label}
+                    </DropdownMenuRadioItem>
+                  ))}
                 </DropdownMenuRadioGroup>
               </DropdownMenuContent>
             </DropdownMenu>
           </div>
         </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"></div>
       </div>
     </div>
   );
