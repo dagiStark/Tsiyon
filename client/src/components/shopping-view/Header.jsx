@@ -95,6 +95,7 @@ function ShoppingHeader() {
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs">
             <MenuItems />
+            <HeaderRightContent />
           </SheetContent>
         </Sheet>
 
@@ -102,7 +103,7 @@ function ShoppingHeader() {
           <MenuItems />
         </div>
         {isAuthenticated ? (
-          <div>
+          <div className="hidden lg:block">
             <HeaderRightContent />
           </div>
         ) : null}
