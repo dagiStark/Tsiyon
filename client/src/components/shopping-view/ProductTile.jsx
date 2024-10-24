@@ -1,7 +1,7 @@
 import { Badge } from "../ui/badge";
-import { Card, CardContent } from "../ui/card";
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter } from "../ui/card";
 import PropTypes from "prop-types";
-
 
 function ShoppingProductTile({ product }) {
   return (
@@ -31,7 +31,24 @@ function ShoppingProductTile({ product }) {
               {product?.brand}
             </span>
           </div>
+          <div className="flex items-center justify-between mb-2">
+            <span
+              className={`${
+                product.salePrice > 0 ? "line-through" : ""
+              } text-lg font-semibold text-primary`}
+            >
+              {product?.price}
+            </span>
+            {product?.salePrice > 0 ? (
+              <span className="text-lg font-semibold text-primary">
+                {product?.salePrice}
+              </span>
+            ) : null}
+          </div>
         </CardContent>
+        <CardFooter>
+          <Button className="w-full">Add to Cart</Button>
+        </CardFooter>
       </div>
     </Card>
   );
@@ -45,6 +62,7 @@ ShoppingProductTile.propTypes = {
     title: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
     brand: PropTypes.string.isRequired,
+    price: PropTypes.number,
     salePrice: PropTypes.number,
   }).isRequired,
 };
