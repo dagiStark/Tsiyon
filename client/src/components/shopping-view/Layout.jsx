@@ -1,4 +1,3 @@
-import React from "react";
 import ShoppingHeader from "./Header";
 import { Outlet } from "react-router-dom";
 
